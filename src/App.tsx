@@ -1,7 +1,15 @@
 import "./App.css";
+import Transaction from "./components/Form";
+import TransactionProvider from "./contexts/TransactionsContext";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <TransactionProvider>
+      <div className="App">
+        <Transaction />
+      </div>
+    </TransactionProvider>
+  );
 }
 
 export default App;
