@@ -18,7 +18,7 @@ const Form = () => {
     <div>
       <form onSubmit={handleSubmit(onTransactions)}>
         <input type="text" {...register("transactions")} />
-        <button type="submit">OK</button>
+        <button type="submit">Enviar</button>
       </form>
     </div>
   );
