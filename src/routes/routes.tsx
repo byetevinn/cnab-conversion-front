@@ -1,11 +1,7 @@
-import { Routes } from "react-router-dom"
+import { Routes } from "react-router-dom";
 
 const RoutesMain = () => {
+  return <Routes></Routes>;
+};
 
-    return <Routes>
-        
-    </Routes>
-
-}
-
-export default RoutesMain
+export default RoutesMain;
