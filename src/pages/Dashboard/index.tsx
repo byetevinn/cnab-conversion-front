@@ -4,10 +4,12 @@ import Container from "./style";
 
 const Dashboard = () => {
   return (
-    <Container>
+    <>
       <Header />
-      <Form />
-    </Container>
+      <Container>
+        <Form />
+      </Container>
+    </>
   );
 };
 
