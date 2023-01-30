@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { BaseSyntheticEvent, useContext, useState } from "react";
 
 import { TransactionContext } from "../../contexts/TransactionsContext";
 const Form = () => {
@@ -6,8 +6,7 @@ const Form = () => {
 
   const { handleTransaction } = useContext(TransactionContext);
 
-  const onFiles = (event: any) => {
-    console.log(event.target);
+  const onFiles = (event: BaseSyntheticEvent) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -17,7 +16,7 @@ const Form = () => {
     reader.readAsText(file);
   };
 
-  const onTransactions = async (event: any) => {
+  const onTransactions = async (event: BaseSyntheticEvent) => {
     event.preventDefault();
 
     const textString = fileText as string;
