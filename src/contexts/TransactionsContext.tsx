@@ -1,18 +1,17 @@
-import { ITransactionContext, ITransactionContextProps } from "./interfaces";
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
+
+import {
+  ITransactionContext,
+  ITransactionContextProps,
+  ITransactions,
+} from "./interfaces";
+import api from "../services/api";
 
 export const TransactionContext = createContext<ITransactionContext>(
   {} as ITransactionContext
 );
 
 const TransactionProvider = ({ children }: ITransactionContextProps) => {
-  const [transactions, setTransactions] = useState<string[]>([]);
-
-  useEffect(() => {
-    transactions?.length > 0 &&
-      transactions.forEach((tran) => handleTransaction(tran));
-  }, [transactions]);
-
   const handleTransaction = (transaction: string) => {
     const type = transaction.slice(0, 1);
     const date = transaction.slice(1, 9);
@@ -23,7 +22,7 @@ const TransactionProvider = ({ children }: ITransactionContextProps) => {
     const store_owner = transaction.slice(48, 62).trim();
     const store_name = transaction.slice(62, 80).trim();
 
-    console.log({
+    const transactionsObj = {
       type,
       date,
       value,
@@ -32,11 +31,20 @@ const TransactionProvider = ({ children }: ITransactionContextProps) => {
       hour,
       store_owner,
       store_name,
-    });
+    };
+
+    postTransactions(transactionsObj);
+  };
+
+  const postTransactions = async (data: ITransactions) => {
+    return await api
+      .post("/api/transactions/", data)
+      .then((response) => console.log(response.status))
+      .catch((error) => console.log(error));
   };
 
   return (
-    <TransactionContext.Provider value={{ setTransactions }}>
+    <TransactionContext.Provider value={{ handleTransaction }}>
       {children}
     </TransactionContext.Provider>
   );

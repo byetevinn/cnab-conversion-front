@@ -4,13 +4,13 @@ import { TransactionContext } from "../../contexts/TransactionsContext";
 const Form = () => {
   const [fileText, setFileText] = useState<string | ArrayBuffer | null>("");
 
-  const { setTransactions } = useContext(TransactionContext);
+  const { handleTransaction } = useContext(TransactionContext);
 
   const onFiles = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-      e.target?.result !== undefined && setFileText(e.target.result);
+      setFileText(e.target!.result);
     };
 
     reader.readAsText(file);
@@ -21,9 +21,16 @@ const Form = () => {
 
     const textString = fileText as string;
 
-    const transactions = textString.match(/.{1,81}/g);
+    const transactionsObj = textString.match(/.{1,81}/g);
 
-    setTransactions(transactions!);
+    let transactions: string[] = [];
+
+    if (transactionsObj) {
+      transactions = transactionsObj;
+    }
+
+    transactions.length > 0 &&
+      transactions.forEach((tran) => handleTransaction(tran));
   };
 
   return (

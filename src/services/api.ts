@@ -1,5 +1,8 @@
-const Api = () => {
-  return;
-};
+import axios from "axios";
 
-export default Api;
+const api = axios.create({
+  baseURL: "https://cnab-conversion-production.up.railway.app",
+  timeout: 5000,
+});
+
+export default api;
