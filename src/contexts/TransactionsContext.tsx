@@ -6,7 +6,7 @@ export const TransactionContext = createContext<ITransactionContext>(
 );
 
 const TransactionProvider = ({ children }: ITransactionContextProps) => {
-  const [transactions, setTransactions] = useState<string[]>([] as string[]);
+  const [transactions, setTransactions] = useState<string[]>([]);
 
   useEffect(() => {
     transactions?.length > 0 &&
@@ -14,14 +14,14 @@ const TransactionProvider = ({ children }: ITransactionContextProps) => {
   }, [transactions]);
 
   const handleTransaction = (transaction: string) => {
-    let type = transaction.slice(0, 1);
-    let date = transaction.slice(1, 9);
-    let value = parseInt(transaction.slice(9, 19)) / 100;
-    let cpf = transaction.slice(19, 30);
-    let card = transaction.slice(30, 42);
-    let hour = transaction.slice(42, 48);
-    let store_owner = transaction.slice(48, 62);
-    let store_name = transaction.slice(62, 80);
+    const type = transaction.slice(0, 1);
+    const date = transaction.slice(1, 9);
+    const value = parseInt(transaction.slice(9, 19)) / 100;
+    const cpf = transaction.slice(19, 30);
+    const card = transaction.slice(30, 42);
+    const hour = transaction.slice(42, 48);
+    const store_owner = transaction.slice(48, 62).trim();
+    const store_name = transaction.slice(62, 80).trim();
 
     console.log({
       type,

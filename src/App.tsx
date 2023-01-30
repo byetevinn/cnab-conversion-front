@@ -1,13 +1,14 @@
-import "./App.css";
-import Transaction from "./components/Form";
 import TransactionProvider from "./contexts/TransactionsContext";
+import RoutesMain from "./routes/routes";
+
+import "./App.css";
+import Global from "./styles/global";
 
 function App() {
   return (
     <TransactionProvider>
-      <div className="App">
-        <Transaction />
-      </div>
+      <Global />
+      <RoutesMain />
     </TransactionProvider>
   );
 }
