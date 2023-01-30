@@ -1,6 +1,7 @@
 import { BaseSyntheticEvent, useContext, useState } from "react";
 
 import { TransactionContext } from "../../contexts/TransactionsContext";
+import Container from "./style";
 const Form = () => {
   const [fileText, setFileText] = useState<string | ArrayBuffer | null>("");
 
@@ -36,12 +37,12 @@ const Form = () => {
   };
 
   return (
-    <div>
+    <Container>
       <form onSubmit={onTransactions}>
         <input type="file" accept=".txt" onChange={onFiles} />
         <button type="submit">Enviar</button>
       </form>
-    </div>
+    </Container>
   );
 };
 
