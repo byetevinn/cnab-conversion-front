@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import { TransactionContext } from "../../contexts/TransactionsContext";
 const Form = () => {
@@ -7,6 +7,7 @@ const Form = () => {
   const { handleTransaction } = useContext(TransactionContext);
 
   const onFiles = (event: any) => {
+    console.log(event.target);
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -16,7 +17,7 @@ const Form = () => {
     reader.readAsText(file);
   };
 
-  const onTransactions = async (event: FormEvent<HTMLFormElement>) => {
+  const onTransactions = async (event: any) => {
     event.preventDefault();
 
     const textString = fileText as string;
@@ -27,10 +28,12 @@ const Form = () => {
 
     if (transactionsObj) {
       transactions = transactionsObj;
-    }
 
-    transactions.length > 0 &&
-      transactions.forEach((tran) => handleTransaction(tran));
+      transactions.length > 0 &&
+        transactions.forEach((tran) => handleTransaction(tran));
+
+      event.target[0].value = "";
+    }
   };
 
   return (
