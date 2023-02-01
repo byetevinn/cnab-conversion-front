@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   ITransactionContext,
   ITransactionContextProps,
-  ITransactions,
+  ITransaction,
 } from "./interfaces";
 import api from "../services/api";
 
@@ -15,6 +15,8 @@ export const TransactionContext = createContext<ITransactionContext>(
 );
 
 const TransactionProvider = ({ children }: ITransactionContextProps) => {
+  const [transactions, setTransactions] = useState<ITransaction[]>([]);
+
   const handleTransaction = (transaction: string) => {
     const type = transaction.slice(0, 1);
     const date = transaction.slice(1, 9);
@@ -39,7 +41,7 @@ const TransactionProvider = ({ children }: ITransactionContextProps) => {
     postTransactions(transactionsObj);
   };
 
-  const postTransactions = async (data: ITransactions) => {
+  const postTransactions = async (data: ITransaction) => {
     return await api
       .post("/api/transactions/", data)
       .then((response) =>
@@ -55,8 +57,19 @@ const TransactionProvider = ({ children }: ITransactionContextProps) => {
       });
   };
 
+  const getTransactions = async () => {
+    return await api
+      .get("/api/transactions/")
+      .then((response) => {
+        setTransactions(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <TransactionContext.Provider value={{ handleTransaction }}>
+    <TransactionContext.Provider
+      value={{ handleTransaction, getTransactions, transactions }}
+    >
       {children}
     </TransactionContext.Provider>
   );
