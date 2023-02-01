@@ -1,6 +1,6 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { ReactNode } from "react";
 
-export interface ITransactions {
+export interface ITransaction {
   type: string;
   date: string;
   value: number;
@@ -13,6 +13,8 @@ export interface ITransactions {
 
 export interface ITransactionContext {
   handleTransaction: (transaction: string) => void;
+  getTransactions: () => void;
+  transactions: ITransaction[];
 }
 
 export interface ITransactionContextProps {
