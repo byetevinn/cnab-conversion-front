@@ -28,8 +28,9 @@ Projeto desenvolvido com a finalidade de armazenar dados de arquivos CNAB. Esses
 - AXIOS
 - REACT-TOASTIFY
 - STYLED-COMPONENTS
+- UUID
 
 
 ## Deploy do projeto
 
-<a href="https://cnab-conversion-front-ldpsmhc8a-tevinn1.vercel.app/dashboard">Vercel</a>
+<a href="https://cnab-conversion-front.vercel.app/dashboard">Vercel</a>
