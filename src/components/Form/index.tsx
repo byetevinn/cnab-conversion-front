@@ -5,7 +5,7 @@ import Container from "./style";
 const Form = () => {
   const [fileText, setFileText] = useState<string | ArrayBuffer | null>("");
 
-  const { handleTransaction } = useContext(TransactionContext);
+  const { handleTransaction, getTransactions } = useContext(TransactionContext);
 
   const onFiles = (event: BaseSyntheticEvent) => {
     const file = event.target.files[0];
@@ -33,6 +33,8 @@ const Form = () => {
         transactions.forEach((tran) => handleTransaction(tran));
 
       event.target[0].value = "";
+
+      getTransactions();
     }
   };
 
