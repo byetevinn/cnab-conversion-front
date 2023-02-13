@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -44,13 +44,15 @@ const TransactionProvider = ({ children }: ITransactionContextProps) => {
   const postTransactions = async (data: ITransaction) => {
     return await api
       .post("/api/transactions/", data)
-      .then((response) =>
+      .then((response) => {
         toast.success("Enviado com sucesso!", {
           autoClose: 1000,
           theme: "dark",
           toastId: 1,
-        })
-      )
+        });
+
+        getTransactions();
+      })
       .catch((error) => {
         console.log(error);
         toast.error("Ocorreu um erro!", { autoClose: 1000, theme: "dark" });
@@ -65,6 +67,10 @@ const TransactionProvider = ({ children }: ITransactionContextProps) => {
       })
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
 
   return (
     <TransactionContext.Provider
