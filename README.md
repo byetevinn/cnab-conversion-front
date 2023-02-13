@@ -10,6 +10,9 @@ Projeto desenvolvido com a finalidade de armazenar dados de arquivos CNAB. Esses
 
 3- Por fim use o comando `yarn start` para poder rodar a aplicação em local-host
 
+OBS: Não esqueceça que precisa estar rodando a API da aplicação que está no <a href="https://github.com/byetevinn/cnab-conversion">Back-End</a> para o site funcionar de forma correta.
+Caso altere a porta onde a API está funcionando vai precisa trocar tambémm a porta no arquivo `api.ts` dessa aplicação que está no caminho `src > services > api.ts`.
+
 
 ## Tecnologias usadas no projeto
 
